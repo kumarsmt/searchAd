@@ -8,7 +8,8 @@ export const Search = () => {
 
         const res = await fetch(`https://sum-search.onrender.com/`, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             method: 'get',
             keyword
@@ -20,7 +21,8 @@ export const Search = () => {
 
         const res = await fetch(`https://sum-search.onrender.com/`, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             method: 'get',
             keyword
