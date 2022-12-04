@@ -3,7 +3,7 @@ import {Button, Grid, TextField} from '@mui/material';
 export const Search = () => {
     const [data, setData] = useState([]);
     const [keyword, setKeyword] = useState(null);
-    const baseUrl = process.env.NODE_ENV === "production" ? 'https://sum-search.onrender.com' : 'http://localhost:9000'
+    const baseUrl = process.env.NODE_ENV === "production" ? process.env.BASEURL : 'http://localhost:9000'
     const handleSubmit = async() => {
 
         const res = await fetch(`${baseUrl}/${keyword}`, {
