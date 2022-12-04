@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+require('dotenv').config()
 import './App.css';
 import { Search } from './search';
 
