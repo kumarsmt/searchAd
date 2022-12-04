@@ -1,4 +1,3 @@
-require('dotenv').config()
 import './App.css';
 import { Search } from './search';
 
