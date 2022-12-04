@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {Button, Grid, TextField, Typography} from '@mui/material';
+import {Button, Grid, TextField} from '@mui/material';
 export const Search = () => {
     const [data, setData] = useState([]);
-    const [keyword, setKeyword] = useState();
-    // const navigate = useNavigate();
+    const [keyword, setKeyword] = useState(null);
     const handleSubmit = async() => {
 
         const res = await fetch(`https://sum-search.onrender.com/${keyword}`, {
@@ -11,8 +10,7 @@ export const Search = () => {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            method: 'get',
-            keyword
+            method: 'get'
         });
         const resData = await res.json();
         setData(resData);
@@ -24,20 +22,21 @@ export const Search = () => {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            method: 'get',
-            keyword
+            method: 'get'
         });
         const resData = await res.json();
         setData(resData);
     }
 
     useEffect(()=>{
-        handleSubmit();
+        if(keyword) {
+            handleSubmit();
+        }
     },[keyword])
 
     return (
         <>
-        <Grid style={{margin: "20px"}} >{console.log(data)}
+        <Grid style={{margin: "20px"}} >{console.log(process.env)}
             <TextField placeholder="acne, netflix, small, for" variant="outlined" onChange={(e)=>setKeyword(e.target.value)}></TextField>
             <Button style={{margin: "10px 20px"}} variant="contained" onClick={handleAll}>Show all</Button>
         </Grid>

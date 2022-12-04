@@ -3,8 +3,7 @@ const dbName = 'search';
 require("dotenv").config();
 
 const client = new mongodb.MongoClient(process.env.DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
-
-const db = async(string) => {
+const dbString = async(string) => {
     let result = await client.connect();
     const db = result.db(dbName);
     // db.collection('ads').insertMany([
@@ -42,7 +41,7 @@ const db = async(string) => {
             $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$companyAds", 0 ] }, "$$ROOT" ] } }
          },
         { 
-            $match: !string ? {} : { 
+            $match:{ 
                 $or: [
                     {
                     primaryText: { $regex: "\\b"+string+"\\b", $options: "i"} 
@@ -66,5 +65,23 @@ const db = async(string) => {
     ]).toArray()
     
 }
+const db = async() => {
+    let result = await client.connect();
+    const db = result.db(dbName);
+    return await db.collection('ads').aggregate([
+        {
+            $lookup:{
+                from: "companies",
+                as: "companyAds",
+                localField: "companyId",
+                foreignField: "_id",
+            }
+        },
+        {
+            $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$companyAds", 0 ] }, "$$ROOT" ] } }
+         }
+    ]).toArray()
+    
+}
 
-module.exports = db;
+module.exports = {db, dbString};
