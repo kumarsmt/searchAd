@@ -3,9 +3,10 @@ import {Button, Grid, TextField} from '@mui/material';
 export const Search = () => {
     const [data, setData] = useState([]);
     const [keyword, setKeyword] = useState(null);
+    const baseUrl = process.env.NODE_ENV === "production" ? 'https://sum-search.onrender.com' : 'http://localhost:9000'
     const handleSubmit = async() => {
 
-        const res = await fetch(`https://sum-search.onrender.com/${keyword}`, {
+        const res = await fetch(`${baseUrl}/${keyword}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
@@ -17,7 +18,7 @@ export const Search = () => {
     }
     const handleAll = async() => {
 
-        const res = await fetch(`https://sum-search.onrender.com/`, {
+        const res = await fetch(`${baseUrl}/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
@@ -36,7 +37,7 @@ export const Search = () => {
 
     return (
         <>
-        <Grid style={{margin: "20px"}} >{console.log(process.env)}
+        <Grid style={{margin: "20px"}} >
             <TextField placeholder="acne, netflix, small, for" variant="outlined" onChange={(e)=>setKeyword(e.target.value)}></TextField>
             <Button style={{margin: "10px 20px"}} variant="contained" onClick={handleAll}>Show all</Button>
         </Grid>
