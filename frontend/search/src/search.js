@@ -37,7 +37,7 @@ export const Search = () => {
 
     return (
         <>
-        <Grid style={{margin: "20px"}} >{console.log(process.env,baseUrl)}
+        <Grid style={{margin: "20px"}} >
             <TextField placeholder="acne, netflix, small, for" variant="outlined" onChange={(e)=>setKeyword(e.target.value)}></TextField>
             <Button style={{margin: "10px 20px"}} variant="contained" onClick={handleAll}>Show all</Button>
         </Grid>
