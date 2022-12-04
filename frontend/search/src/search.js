@@ -6,7 +6,7 @@ export const Search = () => {
     // const navigate = useNavigate();
     const handleSubmit = async() => {
 
-        const res = await fetch(`https://sum-search.onrender.com/`, {
+        const res = await fetch(`https://sum-search.onrender.com/${keyword}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
